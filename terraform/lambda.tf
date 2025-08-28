@@ -1,7 +1,7 @@
 # Lambda function
 resource "aws_lambda_function" "api" {
   filename         = "payments-api.zip"
-  function_name    = "${var.project_name}-api"
+  function_name    = var.project_name
   role            = aws_iam_role.lambda_execution_role.arn
   handler         = "Payments.Api::Payments.Api.LambdaEntryPoint::FunctionHandlerAsync"
   runtime         = "dotnet8"
@@ -24,7 +24,7 @@ resource "aws_lambda_function" "api" {
 
 # CloudWatch Log Group
 resource "aws_cloudwatch_log_group" "lambda" {
-  name              = "/aws/lambda/${var.project_name}-api"
+  name              = "/aws/lambda/${var.project_name}"
   retention_in_days = 7
 
   tags = {
@@ -36,7 +36,7 @@ resource "aws_cloudwatch_log_group" "lambda" {
 resource "aws_lambda_provisioned_concurrency_config" "api" {
   count                             = var.enable_provisioned_concurrency ? 1 : 0
   function_name                     = aws_lambda_function.api.function_name
-  provisioned_concurrency_capacity = 1
+  provisioned_concurrent_executions = 1
   qualifier                        = aws_lambda_function.api.version
 }
 

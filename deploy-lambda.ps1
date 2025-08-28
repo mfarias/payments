@@ -30,15 +30,15 @@ if ($LASTEXITCODE -ne 0) {
 
 # Create Lambda zip
 Set-Location publish
-if (Test-Path "..\..\terraform\payments-api.zip") {
-    Remove-Item "..\..\terraform\payments-api.zip"
+if (Test-Path "..\..\..\terraform\payments-api.zip") {
+    Remove-Item "..\..\..\terraform\payments-api.zip"
 }
-Compress-Archive -Path * -DestinationPath "..\..\terraform\payments-api.zip"
+Compress-Archive -Path * -DestinationPath "..\..\..\terraform\payments-api.zip"
 Write-Host "✅ Lambda package created" -ForegroundColor Green
 
 # Step 2: Deploy infrastructure
 Write-Host "`n🏗️ Deploying infrastructure..." -ForegroundColor Cyan
-Set-Location "..\..\terraform"
+Set-Location "..\..\..\terraform"
 
 terraform init
 terraform plan -var="aws_region=$AwsRegion" -var="project_name=$ProjectName"

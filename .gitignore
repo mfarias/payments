@@ -52,3 +52,22 @@ node_modules/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+*.tfvars
+crash.log
+crash.*.log
+*.tfplan
+*.tfplan.*
+
+# .NET Publish artifacts
+publish/
+dist/
+
+# Lambda deployment packages
+*.zip

@@ -36,8 +36,10 @@ resource "aws_security_group" "rds" {
 
 # Random password for RDS
 resource "random_password" "db_password" {
-  length  = 16
-  special = true
+  length      = 16
+  special     = true
+  # Exclude characters that RDS doesn't allow: /, @, ", and space
+  override_special = "!#$%&*()-_=+[]{}<>:?"
 }
 
 # RDS Instance - Free tier optimized

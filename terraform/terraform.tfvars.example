@@ -15,4 +15,4 @@ lambda_timeout = 30
 
 # Set to true for no cold starts (~$4.20/month)
 # Set to false for maximum cost savings (~$0.20/month)
-enable_provisioned_concurrency = true
+enable_provisioned_concurrency = false
