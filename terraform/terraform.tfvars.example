@@ -1,0 +1,18 @@
+# Example Terraform variables for Lambda deployment
+# Copy this to terraform.tfvars and adjust as needed
+
+aws_region = "us-east-1"
+project_name = "payments-api"
+environment = "test"
+
+# Database settings (Free tier)
+db_name = "PaymentsDb"
+db_username = "postgres"
+
+# Lambda settings
+lambda_memory = 512
+lambda_timeout = 30
+
+# Set to true for no cold starts (~$4.20/month)
+# Set to false for maximum cost savings (~$0.20/month)
+enable_provisioned_concurrency = true
