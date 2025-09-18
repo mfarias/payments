@@ -27,7 +27,8 @@ public class Startup
         services.AddScoped<IAggregatedPaymentService, AggregatedPaymentService>();
 
         services.AddControllers();
-        services.AddOpenApi();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,14 +43,16 @@ public class Startup
         // Configure the HTTP request pipeline.
         if (env.IsDevelopment())
         {
-            app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapOpenApi());
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();
-        app.UseAuthorization();
-
         app.UseRouting();
-        app.UseEndpoints(endpoints => endpoints.MapControllers());
+        app.UseAuthorization();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 }
